@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GREEN DZ – Découvrir et protéger la nature en Algérie</title>
+  <meta name="description" content="GREEN DZ est une plateforme environnementale pour découvrir, cartographier et protéger les forêts, lacs, montagnes et parcs nationaux d'Algérie.">
+  <meta name="theme-color" content="#1F4D2B">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Feuille de style du projet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="site-header" id="header">
+    <nav class="navbar container" aria-label="Navigation principale">
+      <a href="#accueil" class="logo" aria-label="GREEN DZ – retour à l'accueil">
+        <span class="logo-mark" aria-hidden="true">🌿</span>
+        <span class="logo-text">GREEN <strong>DZ</strong></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+        <li><a href="#decouvrir" class="nav-link">Découvrir la nature</a></li>
+        <li><a href="#carte" class="nav-link">Carte interactive</a></li>
+        <li><a href="#signaler" class="nav-link">Signaler un problème</a></li>
+        <li><a href="#dashboard" class="nav-link">Tableau de bord</a></li>
+        <li><a href="#guide" class="nav-link">Guide écologique</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===== 1. ACCUEIL : HÉROS ===== -->
+    <section class="hero" id="accueil" aria-labelledby="hero-titre">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="hero-badge">Plateforme environnementale algérienne</p>
+        <h1 id="hero-titre">Découvrons et protégeons ensemble la nature d'Algérie</h1>
+        <p class="hero-text">Des cèdres du Djurdjura aux lacs d'El Kala, explorez les trésors naturels du pays, repérez-les sur la carte et signalez les atteintes à l'environnement pour agir près de chez vous.</p>
+        <div class="hero-actions">
+          <a href="#decouvrir" class="btn btn-primary">Explorer les sites</a>
+          <a href="#signaler" class="btn btn-light">Signaler un problème</a>
+        </div>
+
+        <ul class="hero-figures" aria-label="Chiffres clés">
+          <li><strong class="counter" data-target="58">0</strong><span>wilayas concernées</span></li>
+          <li><strong class="counter" data-target="11">0</strong><span>parcs nationaux</span></li>
+          <li><strong class="counter" data-target="2381741">0</strong><span>km² de territoire</span></li>
+        </ul>
+      </div>
+      <a href="#destinations" class="scroll-hint" aria-label="Défiler vers le bas"><span></span></a>
+    </section>
+
+    <!-- ===== DESTINATIONS VEDETTES ===== -->
+    <section class="section" id="destinations" aria-labelledby="dest-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="dest-titre">Destinations à ne pas manquer</h2>
+          <p>Une sélection de sites naturels emblématiques, du nord méditerranéen au grand Sahara.</p>
+        </header>
+
+        <div class="featured-grid">
+          <article class="card feature-card reveal">
+            <div class="card-media">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Montagne_de_Chr%C3%A9a%2C.jpg?width=960" alt="Montagne de Chréa dans l’Atlas blidéen, au sud d’Alger" loading="lazy" decoding="async">
+              <span class="tag tag-parc">Parc national</span>
+              <div class="photo-info">
+                <span class="photo-caption">Hauteurs du massif de Chréa, Atlas blidéen</span>
+                <span class="photo-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Montagne_de_Chr%C3%A9a%2C.jpg" target="_blank" rel="noopener">Hichem amez</a>, Wikimedia Commons</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>Parc national de Chréa</h3>
+              <p>Aux portes d’Alger, un massif couvert de cèdres de l’Atlas, qui se couvre de neige en hiver et attire randonneurs et skieurs.</p>
+              <a href="#decouvrir" class="card-link" data-site="chrea">Voir la fiche</a>
+            </div>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="card-media">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Djurjura_enneige.jpg?width=960" alt="Sommets du Djurdjura couverts de neige en Kabylie" loading="lazy" decoding="async">
+              <span class="tag tag-montagne">Montagne</span>
+              <div class="photo-info">
+                <span class="photo-caption">Le Djurdjura sous la neige</span>
+                <span class="photo-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Djurjura_enneige.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, Georges Martin, CC BY 3.0</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>Djurdjura et Tikjda</h3>
+              <p>Falaises calcaires, neige en hiver et cèdres de l’Atlas : le massif domine la Kabylie et abrite le singe magot.</p>
+              <a href="#decouvrir" class="card-link" data-site="djurdjura">Voir la fiche</a>
+            </div>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="card-media">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parc_National_d%E2%80%99El-Kala_3.JPG?width=960" alt="Paysage du parc national d’El Kala, dans le nord-est de l’Algérie" loading="lazy" decoding="async">
+              <span class="tag tag-parc">Parc national</span>
+              <div class="photo-info">
+                <span class="photo-caption">Paysage du parc national d’El Kala</span>
+                <span class="photo-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Parc_National_d%E2%80%99El-Kala_3.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>Parc national d’El Kala</h3>
+              <p>Lacs, marais, forêts de chênes-lièges et littoral : une réserve de biosphère de l’UNESCO à l’extrême nord-est du pays.</p>
+              <a href="#decouvrir" class="card-link" data-site="elkala">Voir la fiche</a>
+            </div>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="card-media">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Barrage_d%27Erraguene_(3)_%3B_wilaya_de_Jijel_%3B_Alg%C3%A9rie.jpg?width=960" alt="Le barrage d’Erraguene et son lac de retenue dans la wilaya de Jijel" loading="lazy" decoding="async">
+              <span class="tag tag-lac">Barrage</span>
+              <div class="photo-info">
+                <span class="photo-caption">Le barrage d’Erraguene, wilaya de Jijel</span>
+                <span class="photo-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Barrage_d%27Erraguene_(3)_%3B_wilaya_de_Jijel_%3B_Alg%C3%A9rie.jpg" target="_blank" rel="noopener">Imene86</a>, Wikimedia Commons</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>Barrage d’Erraguene</h3>
+              <p>Retenue d’eau sur l’oued Djendjen, dans la wilaya de Jijel, au milieu des reliefs de l’est de la Kabylie.</p>
+              <a href="#decouvrir" class="card-link" data-site="erraguene">Voir la fiche</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="center reveal">
+          <a href="#decouvrir" class="btn btn-outline">Voir tous les sites</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== MISSION ===== -->
+    <section class="section section-beige" id="mission" aria-labelledby="mission-titre">
+      <div class="container mission-layout">
+        <div class="mission-intro reveal">
+          <h2 id="mission-titre">Notre mission</h2>
+          <p>GREEN DZ rassemble citoyens, randonneurs, étudiants et associations autour d'un même objectif : faire connaître la richesse naturelle de l'Algérie et préserver ce patrimoine pour les générations futures.</p>
+          <p>Chaque signalement, chaque geste adopté et chaque site partagé contribue à une meilleure protection de nos paysages.</p>
+        </div>
+
+        <div class="pillars">
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">🧭</span>
+            <h3>Découvrir</h3>
+            <p>Parcourir les forêts, lacs, montagnes et parcs nationaux, et enregistrer vos lieux préférés.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">📍</span>
+            <h3>Signaler</h3>
+            <p>Déclarer incendies, pollutions, déchets sauvages et déforestation avec leur position exacte.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">📊</span>
+            <h3>Comprendre</h3>
+            <p>Suivre l'état des signalements par type, par wilaya et par gravité grâce à des statistiques claires.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">🌱</span>
+            <h3>Agir</h3>
+            <p>Adopter des gestes concrets avec notre guide écologique et notre liste d'engagements.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== APERÇU DES STATISTIQUES ===== -->
+    <section class="section stats-preview" id="apercu-stats" aria-labelledby="apercu-titre">
+      <div class="container">
+        <header class="section-head section-head-light reveal">
+          <h2 id="apercu-titre">L'environnement en chiffres</h2>
+          <p>Données calculées en direct à partir des signalements enregistrés sur cet appareil.</p>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <strong id="prevTotal">0</strong>
+            <span>signalements au total</span>
+          </div>
+          <div class="stat-card reveal">
+            <strong id="prevUrgent">0</strong>
+            <span>cas de gravité élevée</span>
+          </div>
+          <div class="stat-card reveal">
+            <strong id="prevWilayas">0</strong>
+            <span>wilayas touchées</span>
+          </div>
+          <div class="stat-card reveal">
+            <strong id="prevFavs">0</strong>
+            <span>sites favoris</span>
+          </div>
+        </div>
+
+        <p class="center reveal">
+          <a href="#dashboard" class="btn btn-light">Ouvrir le tableau de bord</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 2. DÉCOUVRIR LA NATURE ===== -->
+    <section class="section" id="decouvrir" aria-labelledby="decouvrir-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="decouvrir-titre">Découvrir la nature</h2>
+          <p>Forêts, lacs, montagnes et parcs nationaux : filtrez, recherchez et ajoutez vos sites favoris.</p>
+        </header>
+
+        <div class="toolbar reveal">
+          <div class="filters" id="natureFilters" role="group" aria-label="Filtrer par catégorie">
+            <button type="button" class="chip active" data-filter="tous">Tous</button>
+            <button type="button" class="chip" data-filter="foret">Forêts</button>
+            <button type="button" class="chip" data-filter="lac">Lacs</button>
+            <button type="button" class="chip" data-filter="montagne">Montagnes</button>
+            <button type="button" class="chip" data-filter="parc">Parcs nationaux</button>
+          </div>
+          <div class="toolbar-right">
+            <label class="search-box">
+              <span class="visually-hidden">Rechercher un site</span>
+              <input type="search" id="searchInput" placeholder="Rechercher un site ou une wilaya…" autocomplete="off">
+            </label>
+            <button type="button" class="chip chip-fav" id="favFilter" aria-pressed="false">❤ Mes favoris <span id="favCount">0</span></button>
+          </div>
+        </div>
+
+        <div class="nature-grid" id="natureGrid" aria-live="polite"></div>
+        <p class="empty-state" id="natureEmpty" hidden>Aucun site ne correspond à votre recherche. Essayez un autre mot-clé ou une autre catégorie.</p>
+      </div>
+    </section>
+
+    <!-- ===== 3. CARTE INTERACTIVE ===== -->
+    <section class="section section-beige" id="carte" aria-labelledby="carte-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="carte-titre">Carte interactive</h2>
+          <p>Localisez les sites naturels et visualisez les signalements de la communauté.</p>
+        </header>
+
+        <div class="map-controls reveal" role="group" aria-label="Calques de la carte">
+          <label class="check"><input type="checkbox" class="map-layer" value="foret" checked> <span class="dot dot-foret"></span> Forêts</label>
+          <label class="check"><input type="checkbox" class="map-layer" value="lac" checked> <span class="dot dot-lac"></span> Lacs</label>
+          <label class="check"><input type="checkbox" class="map-layer" value="montagne" checked> <span class="dot dot-montagne"></span> Montagnes</label>
+          <label class="check"><input type="checkbox" class="map-layer" value="parc" checked> <span class="dot dot-parc"></span> Parcs nationaux</label>
+          <label class="check"><input type="checkbox" id="layerReports" checked> <span class="dot dot-alerte"></span> Signalements</label>
+          <button type="button" class="btn btn-small btn-outline" id="mapReset">Recentrer la carte</button>
+        </div>
+
+        <div class="map-wrap reveal">
+          <div id="map" role="application" aria-label="Carte interactive de l'Algérie"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. SIGNALER UN PROBLÈME ===== -->
+    <section class="section" id="signaler" aria-labelledby="signaler-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="signaler-titre">Signaler un problème</h2>
+          <p>Incendie, pollution, déchets ou déforestation : décrivez la situation et indiquez le lieu sur la carte.</p>
+        </header>
+
+        <div class="report-layout">
+          <form class="report-form reveal" id="reportForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="rType">Type de problème *</label>
+                <select id="rType" name="type" required>
+                  <option value="">Choisir un type…</option>
+                  <option value="incendie">🔥 Incendie</option>
+                  <option value="pollution">🏭 Pollution</option>
+                  <option value="dechets">🗑️ Déchets sauvages</option>
+                  <option value="deforestation">🪓 Déforestation</option>
+                </select>
+                <small class="error" data-error-for="rType"></small>
+              </div>
+              <div class="field">
+                <label for="rWilaya">Wilaya *</label>
+                <select id="rWilaya" name="wilaya" required>
+                  <option value="">Choisir une wilaya…</option>
+                </select>
+                <small class="error" data-error-for="rWilaya"></small>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="rLieu">Lieu précis *</label>
+              <input type="text" id="rLieu" name="lieu" placeholder="Ex. : forêt de Baïnem, près du village…" maxlength="100" required>
+              <small class="error" data-error-for="rLieu"></small>
+            </div>
+
+            <div class="field">
+              <label for="rDesc">Description *</label>
+              <textarea id="rDesc" name="description" rows="4" placeholder="Décrivez ce que vous avez observé (10 caractères minimum)." maxlength="500" required></textarea>
+              <small class="error" data-error-for="rDesc"></small>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="rGravite">Gravité *</label>
+                <select id="rGravite" name="gravite" required>
+                  <option value="">Choisir…</option>
+                  <option value="faible">Faible</option>
+                  <option value="moyenne">Moyenne</option>
+                  <option value="elevee">Élevée</option>
+                </select>
+                <small class="error" data-error-for="rGravite"></small>
+              </div>
+              <div class="field">
+                <label for="rDate">Date de l'observation *</label>
+                <input type="date" id="rDate" name="date" required>
+                <small class="error" data-error-for="rDate"></small>
+              </div>
+            </div>
+
+            <fieldset class="coords">
+              <legend>Position sur la carte *</legend>
+              <div class="form-row">
+                <div class="field">
+                  <label for="rLat">Latitude</label>
+                  <input type="number" id="rLat" name="lat" step="any" min="18" max="38" placeholder="Cliquez sur la carte">
+                </div>
+                <div class="field">
+                  <label for="rLng">Longitude</label>
+                  <input type="number" id="rLng" name="lng" step="any" min="-9" max="12" placeholder="Cliquez sur la carte">
+                </div>
+              </div>
+              <button type="button" class="btn btn-small btn-outline" id="btnLocate">📍 Utiliser ma position</button>
+              <small class="error" data-error-for="rCoords"></small>
+            </fieldset>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Envoyer le signalement</button>
+              <button type="reset" class="btn btn-outline" id="btnFormReset">Effacer</button>
+            </div>
+          </form>
+
+          <aside class="report-side reveal">
+            <h3>Choisissez le lieu</h3>
+            <p class="hint">Cliquez sur la carte pour placer le repère du signalement.</p>
+            <div id="reportMap" role="application" aria-label="Carte de sélection du lieu"></div>
+          </aside>
+        </div>
+
+        <div class="report-list-wrap reveal">
+          <div class="list-head">
+            <h3>Signalements enregistrés <span class="count-badge" id="reportCount">0</span></h3>
+            <label class="search-box">
+              <span class="visually-hidden">Filtrer par type</span>
+              <select id="reportFilter">
+                <option value="tous">Tous les types</option>
+                <option value="incendie">Incendies</option>
+                <option value="pollution">Pollutions</option>
+                <option value="dechets">Déchets</option>
+                <option value="deforestation">Déforestation</option>
+              </select>
+            </label>
+          </div>
+          <ul class="report-list" id="reportList" aria-live="polite"></ul>
+          <p class="empty-state" id="reportEmpty" hidden>Aucun signalement pour le moment. Soyez le premier à protéger votre région.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. TABLEAU DE BORD ===== -->
+    <section class="section section-beige" id="dashboard" aria-labelledby="dash-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="dash-titre">Tableau de bord</h2>
+          <p>Statistiques mises à jour automatiquement à chaque nouveau signalement.</p>
+        </header>
+
+        <div class="kpi-grid">
+          <div class="kpi reveal"><span>Total</span><strong id="kpiTotal">0</strong></div>
+          <div class="kpi reveal"><span>Gravité élevée</span><strong id="kpiHigh">0</strong></div>
+          <div class="kpi reveal"><span>Type le plus fréquent</span><strong id="kpiTopType">–</strong></div>
+          <div class="kpi reveal"><span>Wilaya la plus touchée</span><strong id="kpiTopWilaya">–</strong></div>
+        </div>
+
+        <div class="charts-grid">
+          <article class="chart-card reveal">
+            <h3>Par type de problème</h3>
+            <div class="bars" id="chartType"></div>
+          </article>
+          <article class="chart-card reveal">
+            <h3>Par niveau de gravité</h3>
+            <div class="bars" id="chartGravite"></div>
+          </article>
+          <article class="chart-card chart-wide reveal">
+            <h3>Top 5 des wilayas</h3>
+            <div class="bars" id="chartWilaya"></div>
+          </article>
+        </div>
+
+        <div class="dash-actions reveal">
+          <button type="button" class="btn btn-primary" id="btnExport">Exporter les données (JSON)</button>
+          <button type="button" class="btn btn-outline btn-danger" id="btnClear">Réinitialiser les signalements</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. GUIDE ÉCOLOGIQUE ===== -->
+    <section class="section" id="guide" aria-labelledby="guide-titre">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="guide-titre">Guide écologique</h2>
+          <p>Des conseils simples et pratiques pour préserver l'environnement au quotidien et en pleine nature.</p>
+        </header>
+
+        <div class="guide-layout">
+          <div class="accordion reveal" id="guideAccordion">
+            <div class="acc-item">
+              <h3><button type="button" class="acc-trigger" aria-expanded="false" aria-controls="acc1" id="accBtn1">💧 Économiser l'eau</button></h3>
+              <div class="acc-panel" id="acc1" role="region" aria-labelledby="accBtn1" hidden>
+                <ul>
+                  <li>Réparez rapidement les fuites : un robinet qui goutte gaspille des centaines de litres par mois.</li>
+                  <li>Privilégiez la douche courte et fermez le robinet pendant le brossage des dents.</li>
+                  <li>Arrosez le jardin tôt le matin ou le soir pour limiter l'évaporation.</li>
+                  <li>Récupérez l'eau de rinçage des légumes pour les plantes.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <h3><button type="button" class="acc-trigger" aria-expanded="false" aria-controls="acc2" id="accBtn2">♻️ Réduire et trier les déchets</button></h3>
+              <div class="acc-panel" id="acc2" role="region" aria-labelledby="accBtn2" hidden>
+                <ul>
+                  <li>Utilisez un cabas réutilisable plutôt que des sacs plastiques jetables.</li>
+                  <li>Séparez papier, plastique, verre et déchets organiques lorsque c'est possible.</li>
+                  <li>Compostez les restes de cuisine pour enrichir le sol.</li>
+                  <li>Ne jetez jamais de déchets dans la nature, les oueds ou en bord de mer.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <h3><button type="button" class="acc-trigger" aria-expanded="false" aria-controls="acc3" id="accBtn3">🌲 Protéger les forêts</button></h3>
+              <div class="acc-panel" id="acc3" role="region" aria-labelledby="accBtn3" hidden>
+                <ul>
+                  <li>N'allumez jamais de feu en forêt, surtout en été, et n'abandonnez pas de mégots.</li>
+                  <li>Plantez des arbres d'espèces locales (pin d'Alep, chêne-liège, caroubier).</li>
+                  <li>Évitez d'acheter du bois ou du charbon d'origine illégale.</li>
+                  <li>Signalez immédiatement toute fumée suspecte aux secours.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <h3><button type="button" class="acc-trigger" aria-expanded="false" aria-controls="acc4" id="accBtn4">⚡ Économiser l'énergie</button></h3>
+              <div class="acc-panel" id="acc4" role="region" aria-labelledby="accBtn4" hidden>
+                <ul>
+                  <li>Remplacez les ampoules classiques par des LED.</li>
+                  <li>Éteignez les appareils en veille et débranchez les chargeurs inutilisés.</li>
+                  <li>Profitez de la lumière naturelle et de l'ensoleillement du pays.</li>
+                  <li>Privilégiez la marche, le vélo ou le covoiturage pour les trajets courts.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <h3><button type="button" class="acc-trigger" aria-expanded="false" aria-controls="acc5" id="accBtn5">🥾 Randonner de façon responsable</button></h3>
+              <div class="acc-panel" id="acc5" role="region" aria-labelledby="accBtn5" hidden>
+                <ul>
+                  <li>Restez sur les sentiers balisés pour protéger la végétation.</li>
+                  <li>Remportez tous vos déchets, y compris les restes de nourriture.</li>
+                  <li>Observez la faune à distance sans la nourrir ni la déranger.</li>
+                  <li>Ne cueillez pas les plantes protégées et ne ramassez pas de souvenirs naturels.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <aside class="guide-side">
+            <div class="checklist-card reveal">
+              <h3>Mes engagements</h3>
+              <p class="hint">Cochez les gestes que vous adoptez. Votre progression est sauvegardée.</p>
+              <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+              <p class="progress-text" id="progressText">0 sur 6 engagements</p>
+              <ul class="checklist" id="checklist">
+                <li><label><input type="checkbox" data-id="eau"> Fermer le robinet quand je ne m'en sers pas</label></li>
+                <li><label><input type="checkbox" data-id="sac"> Utiliser un sac réutilisable</label></li>
+                <li><label><input type="checkbox" data-id="tri"> Trier mes déchets</label></li>
+                <li><label><input type="checkbox" data-id="arbre"> Planter ou parrainer un arbre</label></li>
+                <li><label><input type="checkbox" data-id="rando"> Ne rien laisser derrière moi en nature</label></li>
+                <li><label><input type="checkbox" data-id="partage"> Sensibiliser mon entourage</label></li>
+              </ul>
+              <button type="button" class="btn btn-small btn-outline" id="btnChecklistReset">Tout décocher</button>
+            </div>
+
+            <div class="emergency-card reveal">
+              <h3>Numéros utiles</h3>
+              <ul>
+                <li><span>Protection civile</span> <a href="tel:14">14</a></li>
+                <li><span>Police secours</span> <a href="tel:17">17</a></li>
+                <li><span>Gendarmerie nationale</span> <a href="tel:1055">1055</a></li>
+              </ul>
+              <p class="hint">En cas d'incendie ou de danger immédiat, appelez d'abord les secours, puis faites un signalement ici.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FENÊTRE DE DÉTAILS ===== -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" data-close-modal aria-label="Fermer la fenêtre">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" role="status"></div>
+
+  <!-- ===== PIED DE PAGE ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#accueil" class="logo logo-light" aria-label="GREEN DZ – retour à l'accueil">
+          <span class="logo-mark" aria-hidden="true">🌿</span>
+          <span class="logo-text">GREEN <strong>DZ</strong></span>
+        </a>
+        <p>Découvrir et protéger la nature en Algérie, ensemble.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Plan du site">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="#decouvrir">Découvrir la nature</a></li>
+          <li><a href="#carte">Carte interactive</a></li>
+          <li><a href="#signaler">Signaler un problème</a></li>
+          <li><a href="#dashboard">Tableau de bord</a></li>
+          <li><a href="#guide">Guide écologique</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#mission">Notre mission</a></li>
+          <li><a href="#destinations">Destinations vedettes</a></li>
+          <li><a href="#apercu-stats">Chiffres clés</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Données</h4>
+        <p class="footer-note">Les signalements et favoris sont enregistrés localement dans votre navigateur. Cartographie © contributeurs OpenStreetMap. Photos : auteurs et licences indiqués sous chaque photo, dont Georges Martin (Djurdjura, CC BY 3.0), via <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 GREEN DZ – Projet universitaire. Tous droits réservés.</p>
+        <button type="button" class="to-top" id="toTop" aria-label="Retour en haut de la page">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS (avant script.js) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Script du projet -->
+  <script src="script.js"></script>
+</body>
+</html>
